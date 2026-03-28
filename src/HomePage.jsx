@@ -416,8 +416,8 @@ export default function HomePage({ onShowLogin }) {
                   </svg>
                 }
                 title="Phone"
-                content="+91 12345 67890"
-                href="tel:+1234567890"
+                content="+91 12345 67xxy"
+                href="tel:+911234567xxy"
               />
               <ContactItem
                 icon={
