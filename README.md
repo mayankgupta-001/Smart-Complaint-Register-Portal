@@ -21,6 +21,21 @@ Smart Complaint Register is a React + Vite application built for educational ins
 - Recharts (charts)
 - Lucide React (icons)
 
+## Folder structure
+
+- `public/` static assets
+- `src/` app source code
+  - `App.jsx` main router + role-based routes
+  - `HomePage.jsx` public analytic + complaint grid
+  - `LoginPage.jsx` student login form
+  - `components/admin/` admin views
+    - `AdminLogin.jsx` admin login
+    - `AdminDashboard.jsx` department dashboard
+    - `SuperAdminDashboard.jsx` global oversight dashboard
+  - `components/students/complaintRegister.jsx` student complaint flow
+  - `assets/` (static icons/images, optional)
+- `package.json`, `vite.config.js`, `tailwind.config.js`, `eslint.config.js`
+
 ## Required environment variables
 
 Create a `.env` or `.env.local` file at project root (Vite format):
