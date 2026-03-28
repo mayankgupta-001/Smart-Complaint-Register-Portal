@@ -1,16 +1,125 @@
-# React + Vite
+# Smart Complaint Register
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
 
-Currently, two official plugins are available:
+Smart Complaint Register is a React + Vite application built for educational institutions to collect, monitor, and manage complaints from students. It uses Appwrite as a backend for user auth and document storage, and provides:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Student complaint submission + tracking UI
+- Home page analytics and recent complaint feed
+- Admin dashboard (department-based)
+- Super admin overview and management
+- CSV export + status updates + delete
+- Role-based routing (student / admin / super-admin)
 
-## React Compiler
+## Tech stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React 19
+- Vite
+- Tailwind CSS
+- Appwrite (Auth, Database)
+- React Router DOM
+- Recharts (charts)
+- Lucide React (icons)
 
-## Expanding the ESLint configuration
+## Required environment variables
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Create a `.env` or `.env.local` file at project root (Vite format):
+
+- `VITE_APPWRITE_ENDPOINT` (e.g. `https://[APPWRITE_HOST]/v1`)
+- `VITE_APPWRITE_PROJECT` (project ID)
+- `VITE_APPWRITE_DATABASE` (database ID)
+- `VITE_APPWRITE_COMPLAINTS_COLLECTION` (collection ID for complaints)
+- optional `VITE_N8N_WEBHOOK_URL` (if using n8n for email/notification webhook)
+
+### Example `.env`
+
+```
+VITE_APPWRITE_ENDPOINT=https://cloud.appwrite.io/v1
+VITE_APPWRITE_PROJECT=xxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+VITE_APPWRITE_DATABASE=complaints-db-id
+VITE_APPWRITE_COMPLAINTS_COLLECTION=complaints-collection-id
+VITE_N8N_WEBHOOK_URL=https://workflow.n8n.cloud/webhook/your-webhook-id
+```
+
+## Installation
+
+```bash
+npm install
+```
+
+## Development
+
+```bash
+npm run dev
+```
+
+Open `http://localhost:5173` (or the URL shown in terminal).
+
+## Build
+
+```bash
+npm run build
+```
+
+## Preview build
+
+```bash
+npm run preview
+```
+
+## Lint
+
+```bash
+npm run lint
+```
+
+## Project routes
+
+- `/` → Public HomePage (dashboard, stats, search, trending)
+- `/login` → Student login
+- `/complaints` → Student complaint hub (requires user session)
+- `/admin/login` → Admin login
+- `/admin` → Admin dashboard (auto-detect role/department)
+- `/admin/:dept` → Optional explicit department route (e.g., `hostel`, `food`, `super`)
+
+## Roles and permissions
+
+- Student: create/view own complaints, track status
+- Department admin: view department-specific complaints, status updates, delete, export
+- Super admin: view all complaints + full oversight + company-wide analytics
+
+## Appwrite collection schema (recommended)
+
+- `student_id` (string)
+- `name` (string)
+- `email` (string)
+- `category` (string)
+- `description` (string)
+- `message` (string)
+- `status` (enum: `Pending`, `In Progress`, `Resolved`, etc.)
+- `created_at` / `$createdAt` (automatic)
+- `$id` (document ID)
+
+## Workflows
+
+- Student logs in via Appwrite Email/password, submits complaint with category/desc.
+- Admin logs in via Appwrite and is redirected with role detection from `user.prefs` or admin maps.
+- Admin updates complaint status or deletes complaint; optional n8n webhook notification firing.
+
+## Notes
+
+- This reference app uses client-side Appwrite calls directly; production should secure writes with server-side functions or rules.
+- Ensure Appwrite CORS includes your frontend origin.
+- Appwrite database permissions must allow signed-in users to read/write on the complaints collection (or use functions for stricter control).
+
+## Contribution
+
+1. Fork repo
+2. Create branch (`feature/xyz`)
+3. Commit + push
+4. Create PR
+
+## Authors
+
+- Created by Mayank Gupta
+
