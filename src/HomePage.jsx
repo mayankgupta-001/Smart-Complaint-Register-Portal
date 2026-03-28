@@ -4,12 +4,12 @@ import { Client, Databases, Query } from "appwrite";
 
 const client = new Client()
   .setEndpoint(import.meta.env.VITE_APPWRITE_ENDPOINT)
-  .setProject(import.meta.env.VITE_APPWRITE_PROJECT_ID || import.meta.env.VITE_APPWRITE_PROJECT);
+  .setProject(import.meta.env.VITE_APPWRITE_PROJECT);
 
 const databases = new Databases(client);
 
-const DATABASE_ID = import.meta.env.VITE_APPWRITE_DATABASE_ID || import.meta.env.VITE_APPWRITE_DATABASE;
-const COMPLAINT_COLLECTION = import.meta.env.VITE_APPWRITE_COMPLAINT_COLLECTION || import.meta.env.VITE_APPWRITE_COMPLAINTS_COLLECTION;
+const DATABASE_ID = import.meta.env.VITE_APPWRITE_DATABASE;
+const COMPLAINT_COLLECTION = import.meta.env.VITE_APPWRITE_COMPLAINTS_COLLECTION;
 
 export default function HomePage({ onShowLogin }) {
   const [query, setQuery] = useState("");
