@@ -37,7 +37,7 @@ complaint_register/
 │       │   ├── AdminLogin.jsx
 │       │   ├── AdminDashboard.jsx
 │       │   └── SuperAdminDashboard.jsx
-│       ├── students/
+│       └── students/
 │           └── complaintRegister.jsx
 │
 ├── package.json
