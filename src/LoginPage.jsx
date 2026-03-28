@@ -4,8 +4,8 @@ import { LogIn, ArrowRight, Mail, Lock, Eye, EyeOff, Shield } from "lucide-react
 import { Client, Account } from "appwrite";
 
 const client = new Client()
-  .setEndpoint(import.meta.env.VITE_APPWRITE_ENDPOINT || process.env.REACT_APP_APPWRITE_ENDPOINT)
-  .setProject(import.meta.env.VITE_APPWRITE_PROJECT || process.env.REACT_APP_APPWRITE_PROJECT);
+  .setEndpoint(import.meta.env.VITE_APPWRITE_ENDPOINT)
+  .setProject(import.meta.env.VITE_APPWRITE_PROJECT);
 
 const account = new Account(client);
 
